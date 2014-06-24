@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>Student Search</title>
+    ~[wc:commonscripts]
+    <script src="/admin/javascript/md5.js"></script>
+    <script>
+        function formHandler(newLoc) {
+            var URL = newLoc.options[newLoc.selectedIndex].value;
+            window.location.href = URL;
+        }
+    </script>
+    <link href="/images/css/screen.css" rel="stylesheet" media="screen">
+    <link href="/images/css/print.css" rel="stylesheet" media="print">
+    <link rel="stylesheet" href="/images/css/theme/crm-css/jquery-ui.custom.css" type="text/css">
+    <link rel="stylesheet" href="/admin/includes/template/reports-printable.css" type="text/css" media="print">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/css/demo_table_jui.css">
+
+    <style>
+        #search-form{
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    ~[wc:teachers_header_css]~[wc:teachers_navigation_css]
+    ~[wc:teachers_nav_css]
+
+    <h1>Student Search</h1>
+
+    <div class="box-round">
+        <form id="search-form" action="PTsearchResults.html" method="POST">
+            <label for="studentQuery">Last Name Contains: </label>
+            <input type=text id="studentQuery" name="studentQuery" size=15>
+            <div class="button-row">
+                <button type="submit" id="btnSearch"><em>Search</em></button>
+            </div>
+        </form>
+    </div>
+</body>

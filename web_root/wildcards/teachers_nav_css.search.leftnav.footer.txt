@@ -1,0 +1,18 @@
+<script type="text/template" id="link-template">
+    <li>
+        <a href="/teachers/PTsearchform.html">Student Search</a>
+    </li>
+</script>
+
+<script>
+    $j(function() {
+        // Select the last link li tag in the navigation menu.
+        var select = $j('#nav-main li:eq(-1)');
+
+        // Create jQuery object of the inner HTML code within #link-template.
+        var template = $j($j('#link-template').html());
+
+        // Insert link.
+        template.insertAfter(select);
+    });
+</script>
