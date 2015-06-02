@@ -1,0 +1,19 @@
+{
+  "name": "pt-student-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IronCountySchoolDistrict/pt-student-search.git"
+  },
+  "author": "IronCountySchoolDistrict",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/IronCountySchoolDistrict/pt-student-search/issues"
+  },
+  "homepage": "https://github.com/IronCountySchoolDistrict/pt-student-search#readme"
+}
