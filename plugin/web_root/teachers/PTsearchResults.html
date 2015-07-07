@@ -9,15 +9,30 @@
             window.location.href = URL;
         }
     </script>
-    <link href="/images/css/screen.css" rel="stylesheet" media="screen">
-    <link href="/images/css/print.css" rel="stylesheet" media="print">
-    <link rel="stylesheet" href="<!-- @echo IMAGE_SERVER_URL -->/scripts/pt-student-search/css/jquery-ui.custom.css" type="text/css">
-    <link rel="stylesheet" href="<!-- @echo IMAGE_SERVER_URL -->/scripts/pt-student-search/css/reports-printable.css" type="text/css" media="print">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/css/demo_table_jui.css">
+    <script type="text/javascript">
+        require.config({
+            paths: {
+                "datatables": "//cdn.datatables.net/1.10.7/js/jquery.dataTables",
+                "datatables.jqueryui": "//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui"
+            },
+            shim: {
+                "datatables": {
+                    deps: ["jquery"],
+                    exports: "jQuery.fn.dataTable"
+                },
+                "datatables.jqueryui": {
+                    deps: ["datatables"]
+                }
+            }
+        });
+    </script>
+    <link href="<!-- @echo IMAGE_SERVER_URL -->/images/css/screen.css" rel="stylesheet" media="screen">
+    <link href="<!-- @echo IMAGE_SERVER_URL -->/images/css/print.css" rel="stylesheet" media="print">
+   
+    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui.css">
     <script>
-        var dataTablesURI = 'https://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js';
-        require([dataTablesURI], function() {
+        require(["jquery", "datatables", "datatables.jqueryui"], function() {
             $j('#students').dataTable({
                 "oLanguage": {
                     "sEmptyTable": "No students matched your request"
