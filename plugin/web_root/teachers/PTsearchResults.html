@@ -1,113 +1,43 @@
 <html>
+
 <head>
     <title>Student Search Results</title>
     ~[wc:commonscripts]
-    <script language="JavaScript" src="/admin/javascript/md5.js"></script>
-    <script language="javascript">
-        function formHandler(newLoc) {
-            var URL = newLoc.options[newLoc.selectedIndex].value;
-            window.location.href = URL;
-        }
-    </script>
-    <script type="text/javascript">
+    <script src='/admin/javascript/md5.js'></script>
+    <script>
         require.config({
             paths: {
-                "datatables": "//cdn.datatables.net/1.10.7/js/jquery.dataTables",
-                "datatables.jqueryui": "//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui"
+                'datatables': '//cdn.datatables.net/1.10.7/js/jquery.dataTables',
+                'datatables.jqueryui': '//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui',
+                'bluebird': 'https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.4.0/bluebird'
             },
             shim: {
-                "datatables": {
-                    deps: ["jquery"],
-                    exports: "jQuery.fn.dataTable"
+                'datatables': {
+                    deps: ['jquery'],
+                    exports: 'jQuery.fn.dataTable'
                 },
-                "datatables.jqueryui": {
-                    deps: ["datatables"]
+                'datatables.jqueryui': {
+                    deps: ['datatables']
                 }
             }
         });
-    </script>
-    <link href="/images/css/screen.css" rel="stylesheet" media="screen">
-    <link href="/images/css/print.css" rel="stylesheet" media="print">
 
-    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui.css">
-    <script>
-        require(["jquery", "datatables", "datatables.jqueryui"], function() {
-            $j('#students').dataTable({
-                "oLanguage": {
-                    "sEmptyTable": "No students matched your request"
-                },
-                // Make the "Submit Log Entry" column non-sortable.
-                "aoColumns": [
-                    null,
-                    null,
-                    null,
-                    { "bSortable": false },
-                    { "bSortable": false }
-                ],
-                "bProcessing": true,
-                "bPaginate": false,
-                "bFilter": true,
-                "bJQueryUI": true
-            });
-            $j('#students_wrapper').css('display', 'inline-block');
-        });
-
+        var studentQuery = '~(gpv.studentQuery)';
     </script>
+    <link href='/images/css/screen.css' rel='stylesheet' media='screen'>
+    <link href='/images/css/print.css' rel='stylesheet' media='print'>
+
+    <link rel='stylesheet' type='text/css' href='//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css'>
+    <link rel='stylesheet' type='text/css' href='//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui.css'>
+
+    <script src='/scripts/pt-student-search/js/app.js'></script>
 </head>
 
-<body marginwidth=12 marginheight=12 topmargin=12 leftmargin=12 bgcolor="#ffffff">
+<body marginwidth=12 marginheight=12 topmargin=12 leftmargin=12 bgcolor='#ffffff'>
 
-~[wc:teachers_header_css]
-~[wc:teachers_navigation_css]
-~[wc:teachers_nav_css]
+    ~[wc:teachers_header_css] ~[wc:teachers_navigation_css] ~[wc:teachers_nav_css]
 
-<h1>Student Search Results</h1>
-
-<!-- Start of shaded content table -->
-<table id="students" class="display" border="0" cellspacing="0" cellpadding="6">
-    <thead>
-        <tr>
-            <th>Full Name</th>
-            <th>Grade</th>
-            <th>Student Numbers</th>
-            <th>Home Phone Number</th>
-            <th>Submit Log Entry</th>
-        </tr>
-    </thead>
-    <tbody>
-        ~[tlist_sql;
-            SELECT
-                s.Student_number,
-                s.LastFirst as LastFirst,
-                s.Grade_Level,
-                s.Student_number,
-                s.Home_Phone,
-                s.DCID
-            FROM
-                Students s
-            WHERE
-                upper(s.Last_Name) LIKE upper('%~[gpv:studentQuery]%') AND
-                s.Enroll_Status = 0 AND
-                s.Grade_Level <> 99 AND
-                s.schoolid=~(curschoolid)
-            ;]
-            <tr>
-                <td>
-                    <a href="/teachers/sams/studentprofile.html?student_number=~(Student_Number)&studentQuery=~[gpv:studentQuery]">~(LastFirst;t)</a>
-                </td>
-                <td>~(Grade_Level)</td>
-                <td>~(StudentNumber)</td>
-                <!-- TODO: Show all available phone numbers in a popup window -->
-                <td>~(PhoneNumber)</td>
-                <td>
-                    <a href="/teachers/studentpages/logentry.html?frn=001~(DCID)">Submit Log Entry</a>
-                </td>
-            </tr>
-        [/tlist_sql]
-    </tbody>
-</table>
-<!-- End of shaded content table -->
-~[wc:teachers_footer_css]
+    <h1>Student Search Results</h1> ~[wc:teachers_footer_css]
 </body>
+
 </html>
