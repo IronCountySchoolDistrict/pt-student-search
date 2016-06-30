@@ -1,0 +1,6 @@
+<permission_mappings>
+  <permission name='/teachers/home.html'>
+    <implies allow="get">/ws/schema/query/org.irondistrict.ptsearch.queries.search</implies>
+    <implies allow="post">/ws/schema/query/org.irondistrict.ptsearch.queries.search</implies>
+  </permission>
+</permission_mappings>

@@ -1,0 +1,31 @@
+<queries>
+  <query flattened="true" name="org.irondistrict.ptsearch.queries.search" coreTable="students">
+    <args>
+      <arg description="query string" name="query_str" required="true" type="primitive"/>
+    </args>
+    <columns>
+      <column column="students.student_number">student_number</column>
+      <column column="students.lastfirst">student_name</column>
+      <column column="students.grade_level">grade_level</column>
+      <column column="students.home_phone">home_phone</column>
+      <column column="students.dcid">dcid</column>
+    </columns>
+    <sql>
+      <![CDATA[
+        SELECT
+          student_number,
+          lastfirst,
+          grade_level,
+          home_phone,
+          dcid
+        FROM
+          students
+        WHERE
+          upper(last_name) LIKE upper('%' || :query_str || '%') AND
+          enroll_status = 0 AND
+          grade_level <> 99
+      ]]>
+    </sql>
+  </query>
+
+</queries>
