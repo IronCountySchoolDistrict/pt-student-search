@@ -1,27 +1,20 @@
 /* global studentQuery */
 require(['jquery', 'underscore', 'bluebird', 'datatables', 'datatables.jqueryui'], ($, _, Promise) => {
-  var fetchingResultsTemplate = fetch('/scripts/pt-student-search/html/results.html', {
+  var getResultsTemplateAsync = fetch('/scripts/pt-student-search/html/results.html', {
       credentials: 'include'
     })
     .then(response => response.text());
 
-  var fetchingResults = fetch('/ws/schema/query/org.irondistrict.ptsearch.queries.search', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        query_str: studentQuery // see PTsearchResults.html for initialization of this var
-      })
+  var getSearchResultsAsync = fetch(`/teachers/Ptsearch.pshtml.json?query_str=${studentQuery}&curschoolid=${currentSchoolId}`, {
+      method: 'GET',
+      credentials: 'include'
     })
     .then(response => response.json());
 
-  Promise.all([fetchingResultsTemplate, fetchingResults])
+  Promise.all([getResultsTemplateAsync, getSearchResultsAsync])
     .then(results => {
       var resultsTemplate = results[0];
-      var results = results[1].record;
+      var results = results[1];
 
       var compiledTemplate = _.template(resultsTemplate);
       var renderedTemplate = compiledTemplate({
@@ -39,9 +32,8 @@ require(['jquery', 'underscore', 'bluebird', 'datatables', 'datatables.jqueryui'
         'aoColumns': [
           null,
           null,
-          null, {
-            'bSortable': false
-          }, {
+          null, 
+          {
             'bSortable': false
           }
         ],

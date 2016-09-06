@@ -3,16 +3,15 @@
         <tr>
             <th>Full Name</th>
             <th>Grade</th>
-            <th>Student Numbers</th>
+            <th>Student Number</th>
             <th>Home Phone Number</th>
-            <th>Submit Log Entry</th>
         </tr>
     </thead>
     <tbody>
-        <% results.forEach(student => { %>
+        <% results.forEach(function(student) { %>
             <tr>
                 <td>
-                    <a href="/teachers/sams/studentprofile.html?student_number=<%= student.student_number %>&studentQuery=<%= studentQuery %>">
+                    <a href="/teachers/studentpages/student-profile.html?students_frn=001<%= student.dcid %>">
                         <%= student.student_name %>
                     </a>
                 </td>
@@ -24,9 +23,6 @@
                 </td>
                 <td>
                     <%= student.home_phone %>
-                </td>
-                <td>
-                    <a href="/teachers/studentpages/logentry.html?frn=001<%= student.dcid %>">Submit Log Entry</a>
                 </td>
             </tr>
             <% }); %>

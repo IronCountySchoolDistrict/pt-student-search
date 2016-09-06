@@ -1,0 +1,67 @@
+[
+  ~[tlist_sql;
+    SELECT
+      students.schoolid,
+      u_def_ext_students.boundary_hs,
+      CASE
+      WHEN to_char(student_number) IS NULL
+        THEN 'null'
+      ELSE '"' || to_char(student_number) || '"' END,
+      CASE
+      WHEN to_char(lastfirst) IS NULL
+        THEN 'null'
+      ELSE '"' || to_char(lastfirst) || '"' END,
+      CASE
+      WHEN grade_level IS NULL
+        THEN 'null'
+      WHEN grade_level = 0
+        THEN '"K"'
+      WHEN grade_level = -1
+        THEN '"PK4"'
+      WHEN grade_level = -2
+        THEN '"PK3"'
+      ELSE to_char(grade_level) END,
+      CASE
+      WHEN to_char(home_phone) IS NULL
+        THEN 'null'
+      ELSE '"' || to_char(home_phone) || '"' END,
+      CASE
+      WHEN to_char(students.dcid) IS NULL
+        THEN 'null'
+      ELSE to_char(students.dcid) END,
+      CASE WHEN row_number()
+                OVER (
+                  ORDER BY NULL) = count(*)
+                OVER ()
+        THEN ''
+      ELSE ',' END AS comma
+    FROM
+      students
+      LEFT JOIN u_def_ext_students ON students.dcid = u_def_ext_students.studentsdcid
+      LEFT JOIN schools ON u_def_ext_students.boundary_hs = schools.name
+    WHERE
+      upper(last_name) LIKE upper('%' || '~(gpv.query_str)' || '%') AND
+      (students.schoolid = ~(curschoolid) OR
+       (
+         students.schoolid = (
+           SELECT school_number
+           FROM schools
+           WHERE name = 'Success Academy') AND
+         u_def_ext_students.boundary_hs = (
+           SELECT name
+           FROM schools
+           WHERE school_number = ~(curschoolid)
+         )
+       )
+      ) AND
+      enroll_status = 0 AND
+      grade_level <> 99]
+    {
+      "student_number": ~(student_number),
+      "student_name": ~(lastfirst),
+      "grade_level": ~(grade_level),
+      "home_phone": ~(home_phone),
+      "dcid": ~(dcid)
+    }~(comma)
+  [/tlist_sql]
+]
