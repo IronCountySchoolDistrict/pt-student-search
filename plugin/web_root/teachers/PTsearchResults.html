@@ -3,13 +3,13 @@
 <head>
     <title>Student Search Results</title>
     ~[wc:commonscripts]
-    <script src='/admin/javascript/md5.js'></script>
+    <script src="/admin/javascript/md5.js"></script>
     <script>
         require.config({
             paths: {
                 'datatables': '//cdn.datatables.net/1.10.7/js/jquery.dataTables',
                 'datatables.jqueryui': '//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui',
-                'bluebird': 'https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.4.0/bluebird'
+                'bluebird': '//cdnjs.cloudflare.com/ajax/libs/bluebird/3.4.0/bluebird'
             },
             shim: {
                 'datatables': {
@@ -23,17 +23,18 @@
         });
 
         var studentQuery = '~(gpv.studentQuery)';
+        var currentSchoolId = `~(gpv.curschoolid)`;
     </script>
-    <link href='/images/css/screen.css' rel='stylesheet' media='screen'>
-    <link href='/images/css/print.css' rel='stylesheet' media='print'>
+    <link href="/images/css/screen.css" rel="stylesheet" media="screen">
+    <link href="/images/css/print.css" rel="stylesheet" media="print">
 
-    <link rel='stylesheet' type='text/css' href='//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css'>
-    <link rel='stylesheet' type='text/css' href='//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui.css'>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui.css">
 
-    <script src='/scripts/pt-student-search/js/app.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.js"></script>
+    <script src="/scripts/pt-student-search/js/app.js"></script>
 </head>
 
-<body marginwidth=12 marginheight=12 topmargin=12 leftmargin=12 bgcolor='#ffffff'>
+<body marginwidth="12" marginheight="12" topmargin="12" leftmargin="12" bgcolor="#ffffff">
 
     ~[wc:teachers_header_css] ~[wc:teachers_navigation_css] ~[wc:teachers_nav_css]
 
