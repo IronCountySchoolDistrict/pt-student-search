@@ -9,7 +9,8 @@
             paths: {
                 'datatables': '//cdn.datatables.net/1.10.7/js/jquery.dataTables',
                 'datatables.jqueryui': '//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui',
-                'bluebird': '//cdnjs.cloudflare.com/ajax/libs/bluebird/3.4.0/bluebird'
+                'bluebird': '//cdnjs.cloudflare.com/ajax/libs/bluebird/3.4.0/bluebird',
+                'app': '/scripts/pt-student-search/js/app'
             },
             shim: {
                 'datatables': {
@@ -24,6 +25,10 @@
 
         var studentQuery = '~(gpv.studentQuery)';
         var currentSchoolId = `~(gpv.curschoolid)`;
+
+        require(['app'], function(app) {
+            app.default();
+        });
     </script>
     <link href="/images/css/screen.css" rel="stylesheet" media="screen">
     <link href="/images/css/print.css" rel="stylesheet" media="print">
@@ -31,7 +36,6 @@
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.js"></script>
-    <script src="/scripts/pt-student-search/js/app.js"></script>
 </head>
 
 <body marginwidth="12" marginheight="12" topmargin="12" leftmargin="12" bgcolor="#ffffff">

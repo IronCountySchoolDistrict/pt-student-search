@@ -1,5 +1,11 @@
 /* global studentQuery */
-require(['jquery', 'underscore', 'bluebird', 'datatables', 'datatables.jqueryui'], ($, _, Promise) => {
+import $ from 'jquery';
+import _ from 'underscore';
+import Promise from 'bluebird';
+import datatables from 'datatables';
+import datatablesJqueryUi from 'datatables.jqueryui';
+
+export default function() {
   var getResultsTemplateAsync = fetch('/scripts/pt-student-search/html/results.html', {
       credentials: 'include'
     })
@@ -32,7 +38,7 @@ require(['jquery', 'underscore', 'bluebird', 'datatables', 'datatables.jqueryui'
         'aoColumns': [
           null,
           null,
-          null, 
+          null,
           {
             'bSortable': false
           }
@@ -44,5 +50,4 @@ require(['jquery', 'underscore', 'bluebird', 'datatables', 'datatables.jqueryui'
       });
       $('#students_wrapper').css('display', 'inline-block');
     })
-
-});
+}
